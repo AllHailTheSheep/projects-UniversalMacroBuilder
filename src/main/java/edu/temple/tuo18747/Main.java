@@ -12,20 +12,24 @@ public class Main {
     public static void main(String[] args) {
         String argsRes = argChecks(args);
         if (argsRes != null) {
-            help();
+            System.out.println("Usage: UniversalMacroBuilder.jar (-output <out_path> | -input <in_path>)");
             throw new IllegalArgumentException(argsRes);
         }
 
     }
 
-    private static void help() {
-        System.out.println("Usage: UniversalMacroBuilder.jar (-output <out_path> | -input <in_path>)");
-    }
-
+    /**
+     * Checks args given to ensure the following:
+     * <ul>
+     * <li> Either input or output is given.</li>
+     * <li> After either input or output must be a filename. TODO: this is not checked for validity/permissions yet.</li>
+     * <li> Both input and output may not be given.</li>
+     * <li> No unknown arguments are given.</li>
+     * </ul>
+     * @param args: The command line arguments to check for validity.
+     * @return Null if all checks are successful, else an error message for the caller to throw with IllegalArgumentException.
+     */
     public static String argChecks(String[] args) {
-        // check arguments. if -output is specified, next arg should be file path and mode is set to record
-        // if -input is specified, next arg should be a file
-
         if (args.length == 0) {
             return "ERROR: No arguments given!";
         }
@@ -53,6 +57,7 @@ public class Main {
             }
         }
 
+        // sanity check but included for future cases
         if (out_file_str == null && in_file_str == null) {
             return "ERROR: Either -input or -output must be specified!";
         }
