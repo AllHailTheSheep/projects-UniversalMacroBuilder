@@ -1,14 +1,18 @@
 @startuml
 class Main {
     ' takes in command line args to either start recording threads or start the robot reproducer
-
+    + String: in_file_str
+    + String: out_file_str
+    + argChecks(args[]: String)
 }
 
 class Recorder {
     ' this class simply starts and synchronizes the keyboard and mouse event recorders
     outpath: File
+}
 
-
+class Replayer implements Robot {
+    inpath: File
 }
 
 class KeyboardEventRecorder implements NativeKeyListener {
@@ -40,4 +44,5 @@ Recorder --> MouseEventRecorder
 Recorder --> KeyboardEventRecorder
 MouseEventRecorder --> MouseEvent
 KeyboardEventRecorder --> KeyEvent
+Main --> Replayer
 @enduml
