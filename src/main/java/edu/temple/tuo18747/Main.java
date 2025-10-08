@@ -2,6 +2,8 @@ package edu.temple.tuo18747;
 
 import java.io.File;
 
+import static java.lang.System.exit;
+
 public class Main {
     // only one of these strings and files will be populated per run. we could use an enum to help with telling which mode we're in
     // but we can also just be careful with null checks
@@ -14,6 +16,17 @@ public class Main {
         if (argsRes != null) {
             System.out.println("Usage: UniversalMacroBuilder.jar (-output <out_path> | -input <in_path>)");
             throw new IllegalArgumentException(argsRes);
+        }
+
+        // since we are just performing proof of feasibility we will simply call a class that captures some input
+        // or call a class to replicate some input
+        if (in_file_str != null) {
+            DemoKeyCapture.main(null);
+        } else if (out_file_str != null) {
+            // TODO: generate some input
+        } else {
+            System.out.println("How the hell did you end up here?");
+            exit(1);
         }
 
     }
