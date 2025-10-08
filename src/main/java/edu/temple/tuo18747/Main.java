@@ -1,5 +1,6 @@
 package edu.temple.tuo18747;
 
+import java.awt.*;
 import java.io.File;
 
 import static java.lang.System.exit;
@@ -11,7 +12,8 @@ public class Main {
     public static String in_file_str = null;
     File out_file = null;
     File in_file = null;
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws InterruptedException, AWTException {
         String argsRes = argChecks(args);
         if (argsRes != null) {
             System.out.println("Usage: UniversalMacroBuilder.jar (-output <out_path> | -input <in_path>)");
@@ -23,7 +25,7 @@ public class Main {
         if (in_file_str != null) {
             DemoKeyCapture.main(null);
         } else if (out_file_str != null) {
-            // TODO: generate some input
+            DemoKeyReplayer.main(null);
         } else {
             System.out.println("How the hell did you end up here?");
             exit(1);
